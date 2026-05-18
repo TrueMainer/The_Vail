@@ -30,7 +30,7 @@ public class DeathEvents {
         return;
         }
 
-        PlayerCycleData.increaseCycle(player.getUUID());
+        PlayerCycleData.increaseCycle(player.server, player.getUUID());
 
         int currentCycle = PlayerCycleData.getCycle(player.getUUID());
 
