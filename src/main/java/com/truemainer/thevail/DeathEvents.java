@@ -6,6 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.minecraft.world.level.ChunkPos;
 
 @EventBusSubscriber(modid = TheVail.MODID)
 public class DeathEvents {
@@ -35,15 +36,28 @@ public class DeathEvents {
         int currentCycle = PlayerCycleData.getCycle(player.getUUID());
 
         int cycleSpawnX = currentCycle * 10000;
+        int cycleSpawnZ = 0;
 
-        player.teleportTo(
-            player.server.overworld(),
-            cycleSpawnX,
-            100,
-            0,
-            player.getYRot(),
-            player.getXRot()
+        ChunkPos chunkPos = new ChunkPos(cycleSpawnX >> 4, cycleSpawnZ >> 4);
+
+    // Force the target chunk to generate/load before checking height.
+    player.server.overworld().getChunk(chunkPos.x, chunkPos.z);
+
+        int safeY = player.server.overworld()
+        .getHeight(
+        net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE,
+        cycleSpawnX,
+        cycleSpawnZ
         );
+
+player.teleportTo(
+        player.server.overworld(),
+        cycleSpawnX + 0.5,
+        safeY + 2,
+        cycleSpawnZ + 0.5,
+        player.getYRot(),
+        player.getXRot()
+);
 
         player.sendSystemMessage(Component.literal("You have entered Cycle " + currentCycle));
     }
