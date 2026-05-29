@@ -35,29 +35,7 @@ public class DeathEvents {
 
         int currentCycle = PlayerCycleData.getCycle(player.getUUID());
 
-        int cycleSpawnX = currentCycle * 10000;
-        int cycleSpawnZ = 0;
-
-        ChunkPos chunkPos = new ChunkPos(cycleSpawnX >> 4, cycleSpawnZ >> 4);
-
-    // Force the target chunk to generate/load before checking height.
-    player.server.overworld().getChunk(chunkPos.x, chunkPos.z);
-
-        int safeY = player.server.overworld()
-        .getHeight(
-        net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE,
-        cycleSpawnX,
-        cycleSpawnZ
-        );
-
-player.teleportTo(
-        player.server.overworld(),
-        cycleSpawnX + 0.5,
-        safeY + 2,
-        cycleSpawnZ + 0.5,
-        player.getYRot(),
-        player.getXRot()
-);
+        CycleSpawnManager.teleportPlayerToCycle(player, currentCycle);
 
         player.sendSystemMessage(Component.literal("You have entered Cycle " + currentCycle));
     }
