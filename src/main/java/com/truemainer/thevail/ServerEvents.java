@@ -9,12 +9,18 @@ import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 public class ServerEvents {
 
     @SubscribeEvent
-    public static void onServerStarted(ServerStartedEvent event) {
-        PlayerCycleData.load(event.getServer());
-    }
+        public static void onServerStarted(ServerStartedEvent event) {
+
+            PlayerCycleData.load(event.getServer());
+
+            CycleWorldData.load(event.getServer());
+        }
 
     @SubscribeEvent
-    public static void onServerStopping(ServerStoppingEvent event) {
-        PlayerCycleData.save(event.getServer());
-    }
-}
+        public static void onServerStopping(ServerStoppingEvent event) {
+
+            PlayerCycleData.save(event.getServer());
+
+            CycleWorldData.save(event.getServer());
+        }
+    } 

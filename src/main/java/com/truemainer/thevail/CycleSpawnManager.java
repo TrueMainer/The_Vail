@@ -15,6 +15,15 @@ public class CycleSpawnManager {
         int cycleSpawnX = cycle * CYCLE_DISTANCE;
         int cycleSpawnZ = 0;
 
+        if (!CycleWorldData.cycleExists(cycle)) {
+    CycleWorldData.createCycle(
+            cycle,
+            cycleSpawnX,
+            0,
+            cycleSpawnZ
+    );
+} 
+
         ChunkPos chunkPos = new ChunkPos(cycleSpawnX >> 4, cycleSpawnZ >> 4);
 
         overworld.getChunk(chunkPos.x, chunkPos.z);
@@ -34,4 +43,4 @@ public class CycleSpawnManager {
                 player.getXRot()
         );
     }
-}
+} 
