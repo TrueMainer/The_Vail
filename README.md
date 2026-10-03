@@ -1,6 +1,6 @@
 # WIP
 
-Still heavly working on this as its my first project it will take time to make it how I want it.
+This project is still heavily in development. As my first project of this kind, it may take some time to get it where I want it.
 
 # The Vail
 
