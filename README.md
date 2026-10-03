@@ -1,3 +1,7 @@
+# WIP
+
+Still heavly working on this as its my first project it will take time to make it how I want it.
+
 # The Vail
 
 **The Vail** is a Minecraft NeoForge mod centered around death, reincarnation, and progression through successive world cycles.
